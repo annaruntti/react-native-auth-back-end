@@ -1,9 +1,10 @@
-const express = require('express');
-require('dotenv').config();
-require('./models/db');
-const userRouter = require('./routes/user');
+const express = require("express");
+require("dotenv").config();
+require("./models/db");
 
-const User = require('./models/user');
+// const userRouter = require("./routes/user");
+
+const User = require("./models/user");
 
 const app = express();
 
@@ -16,7 +17,7 @@ const app = express();
 // });
 
 app.use(express.json());
-app.use(userRouter);
+// app.use(userRouter);
 
 // const test = async (email, password) => {
 //   const user = await User.findOne({ email: email });
@@ -24,16 +25,35 @@ app.use(userRouter);
 //   console.log(result);
 // };
 
-// test('niraj@email.com', 'niraj12');
+// test('testi@testi.fi', 'Maija Meikäläinen');
 
-app.get('/test', (req, res) => {
-  res.send('Hello world');
+const email = "testi1@testi.fi";
+
+app.post("/create-user", async (req, res) => {
+  const isNewUser = await User.isThisEmailInUse(email);
+  if (!isNewUser)
+    return res.json({
+      success: false,
+      message:
+        "This email is already in use, try sign-in with a different email",
+    });
+  const user = await User({
+    username: "Maija Meikäläinen",
+    email: email,
+    password: "testi1234",
+  });
+  await user.save();
+  res.json(user);
 });
 
-app.get('/', (req, res) => {
-  res.json({ success: true, message: 'Welcome to backend zone!' });
+app.get("/test", (req, res) => {
+  res.send("Hello world");
+});
+
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "Testi testi" });
 });
 
 app.listen(8000, () => {
-  console.log('port is listening');
+  console.log("port is listening");
 });
