@@ -1,8 +1,8 @@
-# Full Stack TODO MongoDb Express React Native and Node JS
+# Backend for Arkiapuri mobile app. Done with MongoDb, Express and Node JS
 
 ## Introduction
 
-This is a Full Stack TODO app. This project is made for YouTube tutorial.
+This is API for Arkiapuri mobile app. You will find mobile app project from here: https://github.com/annaruntti/arkiapuri. Arkiapuri is a mobile native app and done with React Native.
 
 ## How to run / use this project
 
